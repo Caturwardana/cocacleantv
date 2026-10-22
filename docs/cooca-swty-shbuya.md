@@ -6,7 +6,7 @@ This repo is a personal snapshot: upstream [Gathin23/cleanyourtv](https://github
 merged on top. The merge was resolved for the newer upstream sources, so `weather`,
 `builtin_wallpaper_minutes` and the 14 built-in wallpapers work with today's launcher.
 
-Last updated: 22 October 2026.
+Last updated: 23 October 2026.
 
 ## TV
 
@@ -26,9 +26,12 @@ Last updated: 22 October 2026.
 - Launcher `com.gathin.tvhome`, built from this repo (~1.4 MB release APK, wallpapers included).
   - cinematic shelf on, weather for **Bantul** (`-7.8881`, `110.3286`), Celsius, Open-Meteo, hourly cache
   - built-in wallpapers rotating every 60 minutes
-  - 4 columns; dock = Netflix, Prime Video, YouTube, Disney+ Hotstar (the rest of `dock_apps`
-    — Vidio, Google Play Movies, Bstation — fall into the grid because the dock has 4 slots)
+  - 4 columns; dock = Netflix, Prime Video, YouTube, Disney+ (`com.disney.disneyplus`; the rest of
+    `dock_apps` — Vidio, Google Play Movies, Bstation — fall into the grid because the dock has 4 slots)
   - "TV Digital" tile for the tuner app, banner `banner_tv`
+- The bundled Disney+ Hotstar (`in.startv.hotstar.dplus.tv`) was uninstalled for user 0 after the newer
+  `com.disney.disneyplus` was installed. Reversible with
+  `cmd package install-existing in.startv.hotstar.dplus.tv`.
 - Optional weather add-on app `io.github.sumyabazar1.weather` (module-card tile + full-screen page).
   Not needed once the shelf weather is on; safe to uninstall.
 - Debloated: 12 packages disabled, plus the stock launcher. See
@@ -119,7 +122,8 @@ tools\restore.ps1 -TvHost $env:TV_HOST examples\cooca-swty-shbuya\debloat.txt
 
 Undo records live in `~/.cleanyourtv/` on the machine that ran `disable.ps1`; keep them — they are
 what `restore.ps1` reads. Backups (package list, `getprop`, settings) belong in `backup/`, which this
-repo ignores.
+repo ignores. The bundled Disney+ Hotstar removed above is **not** in those records (it was uninstalled,
+not disabled); bring it back with `cmd package install-existing in.startv.hotstar.dplus.tv` if needed.
 
 If `pm uninstall` is refused, reinstalling the stock launcher and re-running
 `set-home-activity` is enough to get the old Home back.
